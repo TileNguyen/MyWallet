@@ -8,12 +8,27 @@
 module.exports = {
 
   attributes: {
+    email: {
+      type: 'email',
+      required: true
+    },
+    password: {
+      type: 'string',
+      required: true
+    }
 
-    login : { type: 'string' },
-
-    logout : { type: 'string' },
-
-    signup : { type: 'string' }
+    // login : { type: 'string' },
+    //
+    // logout : { type: 'string' },
+    //
+    // signup : { type: 'string' }
+  },
+  signup: function (inputs, cb){
+    // Create a user
+    User.create({
+      name: inputs.name,
+      email: inputs.email,
+      password: inputs.password
+    }).exec(cb);
   }
 };
-

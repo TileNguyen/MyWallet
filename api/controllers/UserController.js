@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-	
+
 
 
   /**
@@ -33,9 +33,26 @@ module.exports = {
    * `UserController.signup()`
    */
   signup: function (req, res) {
-    return res.json({
-      todo: 'signup() is not implemented yet!'
-    });
+		// signup
+		User.signup({
+			name: req.param('name'),
+			email: req.param('email'),
+			password: req.param('password')
+		}, function(err, user){
+			if (err) return res.negotiate(err);
+
+			req.session.me = user.id;
+
+			if (req.wantsJSON){
+				return res.ok('Signup successful!');
+			}
+
+
+			return res.redirect('/welcome');
+
+			// return res.json({
+			// 	todo: 'signup() is not implemented yet!'
+			// });
+		});
   }
 };
-
