@@ -13,8 +13,12 @@ module.exports = {
    * `UserController.login()`
    */
   login: function (req, res) {
-    return res.json({
-      todo: 'login() is not implemented yet!'
+    // See 'api/responses/login.js'
+    return res.login({
+      email: req.param('email'),
+      password: req.param('password'),
+      successRedirect: '/',
+      invalidRedirect: '/login'
     });
   },
 
@@ -23,9 +27,14 @@ module.exports = {
    * `UserController.logout()`
    */
   logout: function (req, res) {
-    return res.json({
-      todo: 'logout() is not implemented yet!'
-    });
+
+    req.session.me = null;
+
+    if (req.wantsJSON){
+      return res.ok('Logged out successfully!');
+    }
+
+    return res.redirect('/');
   },
 
 

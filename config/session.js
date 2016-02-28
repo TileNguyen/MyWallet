@@ -67,11 +67,11 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // adapter: 'mongo',
-  // host: 'localhost',
-  // port: 27017,
-  // db: 'sails',
-  // collection: 'sessions',
+  adapter: 'sails-mongo',
+  host: 'localhost',
+  port: 27017,
+  db: 'MyWallet',
+  collection: 'sessions',
 
   /***************************************************************************
   *                                                                          *
@@ -82,10 +82,10 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // username: '',
-  // password: '',
+  // username: 'tile',
+  // password: 'password',
   // auto_reconnect: false,
   // ssl: false,
-  // stringify: true
+  // stringify: false
 
 };

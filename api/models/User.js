@@ -30,5 +30,12 @@ module.exports = {
       email: inputs.email,
       password: inputs.password
     }).exec(cb);
+  },
+// Check login
+  attemptLogin: function(inputs, cb){
+    User.findOne({
+      email: inputs.email,
+      password: inputs.password
+    }).exec(cb);
   }
 };
