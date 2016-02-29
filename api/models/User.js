@@ -5,16 +5,41 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-module.exports = {
+var bcrypt = require('bycript');
 
+
+module.exports = {
+  schema: true,
+  tableName: "users",
+  autoCreatedAt: false,
+  autoUpdatedAt: false,
   attributes: {
+    id: {
+      type: 'integer',
+      unique: true,
+      primaryKey: true,
+      columnName: 'id',
+      required: true
+    },
+    name: {
+      type: 'string'
+    },
     email: {
       type: 'email',
+      unique: true
       required: true
     },
     password: {
       type: 'string',
-      required: true
+      required: true,
+      minLength: 6
+    },
+    toJSON: function(){
+      var obj = this.toObject();
+      delete obj.password;
+      delete obj.createdAt;
+      delete obj.updateAt;
+      return obj;
     }
 
     // login : { type: 'string' },
@@ -22,6 +47,16 @@ module.exports = {
     // logout : { type: 'string' },
     //
     // signup : { type: 'string' }
+  },
+  // lifecycle callback
+  beforeCreate: function(values, cb){
+    // Encript password
+    bycript.hash(values.password, 10, function(err, hash){
+      if (err) return cb(err);
+      values.password = hash;
+      // callback and return hash
+      cb();
+    })
   },
   signup: function (inputs, cb){
     // Create a user
