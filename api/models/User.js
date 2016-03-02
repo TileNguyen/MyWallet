@@ -5,7 +5,7 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
-var bcrypt = require('bycript');
+var bcrypt = require('bcrypt');
 
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
     },
     email: {
       type: 'email',
-      unique: true
+      unique: true,
       required: true
     },
     password: {
@@ -56,7 +56,7 @@ module.exports = {
       values.password = hash;
       // callback and return hash
       cb();
-    })
+    });
   },
   signup: function (inputs, cb){
     // Create a user
