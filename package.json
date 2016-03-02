@@ -8,6 +8,7 @@
     "bcrypt": "^0.8.5",
     "connect-mongo": "^1.1.0",
     "ejs": "2.3.4",
+    "express": "^4.13.4",
     "grunt": "0.4.5",
     "grunt-contrib-clean": "0.6.0",
     "grunt-contrib-coffee": "0.13.0",
@@ -37,8 +38,13 @@
     "url": "git://github.com/ngoi/MyWallet.git"
   },
   "author": "ngoi",
-  "license": "",
+  "license": {
+    "type": "MIT",
+    "url": "http://www.opensource.org/licenses/MIT"
+  },
   "devDependencies": {
+    "mocha": "^2.4.5",
+    "superagent": "^1.8.0-beta.2",
     "supertest": "^1.2.0"
   }
 }

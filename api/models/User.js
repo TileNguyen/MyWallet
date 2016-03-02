@@ -59,12 +59,17 @@ module.exports = {
     });
   },
   signup: function (inputs, cb){
-    // Create a user
-    User.create({
-      name: inputs.name,
-      email: inputs.email,
-      password: inputs.password
-    }).exec(cb);
+    if (inputs){
+      // Create a user
+      User.create({
+        name: inputs.name,
+        email: inputs.email,
+        password: inputs.password
+      }).exec(cb);
+    }
+    else {
+      
+    }
   },
 // Check login
   attemptLogin: function(inputs, cb){
