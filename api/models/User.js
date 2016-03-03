@@ -10,17 +10,17 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
   schema: true,
-  tableName: "users",
+  // tableName: "users",
   autoCreatedAt: false,
   autoUpdatedAt: false,
   attributes: {
-    id: {
-      type: 'integer',
-      unique: true,
-      primaryKey: true,
-      columnName: 'id',
-      required: true
-    },
+    // id: {
+    //   type: 'integer',
+    //   unique: true,
+    //   primaryKey: true,
+    //   columnName: 'id',
+    //   required: true
+    // },
     name: {
       type: 'string'
     },
@@ -50,8 +50,11 @@ module.exports = {
   },
   // lifecycle callback
   beforeCreate: function(values, cb){
+    if(!values.password) {
+      return cb({code: 400, message: 'password not found!'});
+    }
     // Encript password
-    bycript.hash(values.password, 10, function(err, hash){
+    bcrypt.hash(values.password, 10, function(err, hash){
       if (err) return cb(err);
       values.password = hash;
       // callback and return hash
@@ -68,7 +71,7 @@ module.exports = {
       }).exec(cb);
     }
     else {
-      
+
     }
   },
 // Check login

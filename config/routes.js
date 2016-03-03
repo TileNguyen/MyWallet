@@ -33,12 +33,17 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': {view: 'homepage' },
-  'get /login': {view: 'user/login'},
-  'get /signup': {view: 'user/signup'},
-  '/welcome': {view: 'user/welcome'},
-  'post /login': 'UserController.login',
-  'post /signup': 'UserController.signup',
-  '/logout': 'UserController.logout'
+  // 'get /login': {view: 'user/login'},
+  // 'get /signup': {view: 'user/signup'},
+  // '/welcome': {view: 'user/welcome'},
+  // 'post /login': 'UserController.login',
+  // 'post /signup': 'UserController.signup',
+  // '/logout': 'UserController.logout'
+  'GET /users': 'UserController.findAllUsers',
+  'GET /user/:id': 'UserController.findUserById',
+  'POST /users': 'UserController.addUser',
+  'PUT /user/:id': 'UserController.updateUser',
+  'DELETE /user/:id': 'UserController.deleteUser'
 
   /***************************************************************************
   *                                                                          *
