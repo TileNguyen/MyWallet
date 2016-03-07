@@ -76,6 +76,21 @@ module.exports = {
     });
   },
   findUserById: function(req, res){
+    var param = req.allParams();
+    if (!param.id) return res.badRequest();
+    User.native(function(err, collection){
+      if(err){
+        return res.badRequest();
+      }
+      else {
+        collection.find({name: param.id},{}).toArray(function(err, user){
+          if(err){
+            return res.badRequest();
+          }
+          return res.ok(user);
+        });
+      }
+    });
 
   },
   // Add user.
@@ -93,10 +108,26 @@ module.exports = {
     });
   },
   updateUser: function(req, res){
-
+    var param = req.allParams();
+    if (!param.id) return res.badRequest();
+    User.native(function(err, collection){
+      if (err) return res.badRequest();
+      collection.findOneAndUpdate({name: param.id}, {$set: {email: param.email}}, function(err, user){
+        if (err) return res.badRequest();
+        return res.ok(user.value);
+      });
+    });
   },
   deleteUser: function(req, res){
-
+    var param = req.allParams();
+    if (!param.id) return res.badRequest();
+    User.native(function(err, collection){
+      if (err) return res.badRequest();
+      collection.deleteOne({name: param.id},{}, function(err, user){
+        if (err) return res.badRequest();
+        return res.ok(user.value);
+      });
+    });
   }
 
 
