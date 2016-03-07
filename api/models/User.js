@@ -10,17 +10,16 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
   schema: true,
-  // tableName: "users",
-  autoCreatedAt: false,
-  autoUpdatedAt: false,
+  tableName: "user",
+  autoCreatedAt: true,
+  autoUpdatedAt: true,
   attributes: {
-    // id: {
-    //   type: 'integer',
-    //   unique: true,
-    //   primaryKey: true,
-    //   columnName: 'id',
-    //   required: true
-    // },
+    id: {
+      type: 'integer',
+      unique: true,
+      primaryKey: true,
+      columnName: 'id'
+    },
     name: {
       type: 'string'
     },
@@ -41,12 +40,6 @@ module.exports = {
       delete obj.updateAt;
       return obj;
     }
-
-    // login : { type: 'string' },
-    //
-    // logout : { type: 'string' },
-    //
-    // signup : { type: 'string' }
   },
   // lifecycle callback
   beforeCreate: function(values, cb){
