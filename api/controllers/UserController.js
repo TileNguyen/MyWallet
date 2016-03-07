@@ -5,6 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+var ObjectID = require("mongodb").ObjectID
+
 module.exports = {
 
 
@@ -77,13 +79,14 @@ module.exports = {
   },
   findUserById: function(req, res){
     var param = req.allParams();
+    console.log(param);
     if (!param.id) return res.badRequest();
     User.native(function(err, collection){
       if(err){
         return res.badRequest();
       }
       else {
-        collection.find({name: param.id},{}).toArray(function(err, user){
+        collection.find({_id: ObjectID(param.id)},{}).toArray(function(err, user){
           if(err){
             return res.badRequest();
           }
@@ -112,7 +115,7 @@ module.exports = {
     if (!param.id) return res.badRequest();
     User.native(function(err, collection){
       if (err) return res.badRequest();
-      collection.findOneAndUpdate({name: param.id}, {$set: {email: param.email}}, function(err, user){
+      collection.findOneAndUpdate({_id: ObjectID(param.id)}, {$set: {email: param.email}}, function(err, user){
         if (err) return res.badRequest();
         return res.ok(user.value);
       });
@@ -123,7 +126,7 @@ module.exports = {
     if (!param.id) return res.badRequest();
     User.native(function(err, collection){
       if (err) return res.badRequest();
-      collection.deleteOne({name: param.id},{}, function(err, user){
+      collection.deleteOne({_id: ObjectID(param.id)},{}, function(err, user){
         if (err) return res.badRequest();
         return res.ok(user.value);
       });

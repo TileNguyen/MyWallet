@@ -51,10 +51,10 @@ module.exports.policies = {
 
 
 
-  '*': 'tokenAuthentication'
-  'UserController':
-    '*': 'tokenAuthentication'
-
+  '*': 'tokenAuthentication',
+  // 'UserController': {
+  //   '*': 'tokenAuthentication'
+  // }
 
 
 
